@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components'
 
+import Search from './Search'
+
 const Wrapper = styled.div`
   box-sizing: border-box;
   display: flex;
@@ -20,7 +22,7 @@ const App = () => (
       <h1>Meteorita</h1>
     </header>
     <main>
-
+      <Search/>
     </main>
   </Wrapper>
 )
