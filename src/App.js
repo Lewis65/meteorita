@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 
+import Results from './Results'
 import Search from './Search'
 
 const Wrapper = styled.div`
@@ -23,6 +24,7 @@ const App = () => (
     </header>
     <main>
       <Search/>
+      <Results/>
     </main>
   </Wrapper>
 )
