@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled, { ThemeProvider } from 'styled-components'
 import theme from './theme'
 
@@ -6,7 +6,7 @@ import Results from './Results'
 import Search from './Search'
 
 const Wrapper = styled.div`
-  background-color: ${props => props.theme.color.primary};
+  background-color: ${props => props.theme.color.bg};
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -19,18 +19,23 @@ const Wrapper = styled.div`
   }
 `
 
-const App = () => (
-  <ThemeProvider theme={theme}>
-    <Wrapper>
-      <header>
-        <h1>Meteorita</h1>
-      </header>
-      <main>
-        <Search/>
-        <Results/>
-      </main>
-    </Wrapper>
-  </ThemeProvider>
-)
+function App(){
+
+  const [useNight, setUseNight] = useState(false)
+
+  return (
+    <ThemeProvider theme={useNight ? theme.night : theme.day}>
+      <Wrapper>
+        <header>
+          <h1>Meteorita</h1>
+        </header>
+        <main>
+          <Search/>
+          <Results/>
+        </main>
+      </Wrapper>
+    </ThemeProvider>
+  )
+}
 
 export default App;

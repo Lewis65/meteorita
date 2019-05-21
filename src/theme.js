@@ -1,6 +1,12 @@
 export default {
-    color: {
-        primary: "lightgreen",
-        secondary: "purple"
+    night: {
+        color: {
+            bg: "purple"
+        }
+    },
+    day: {
+        color: {
+            bg: "green"
+        }
     }
 }
