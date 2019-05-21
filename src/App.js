@@ -5,6 +5,21 @@ import theme from './theme'
 import Results from './Results'
 import Search from './Search'
 
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+`
+
+const ThemeToggle = styled.button`
+  background-color: ${props => props.theme.color.bg2};
+  border: 0;
+  color: ${props => props.theme.color.body};
+  padding: 1rem;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+`
+
 const Wrapper = styled.div`
   background-color: ${props => props.theme.color.bg};
   box-sizing: border-box;
@@ -14,9 +29,15 @@ const Wrapper = styled.div`
   min-height: 100vh;
   padding: 2rem;
   width: 100vw;
+  h1, h2 {
+    font-family: "Changa", sans-serif;
+    font-size: 4rem;
+    font-weight: 500;
+  }
   * {
-    margin: 0;
-    padding: 0;
+    font-family: "Cairo", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 300;
   }
 `
 
@@ -29,12 +50,12 @@ function App(){
       <Wrapper>
         <header>
           <h1>meteorita</h1>
-          <button onClick={() => setUseNight(!useNight)}>Toggle theme</button>
+          <ThemeToggle onClick={() => setUseNight(!useNight)}>Toggle theme</ThemeToggle>
         </header>
-        <main>
+        <Main>
           <Search/>
           <Results/>
-        </main>
+        </Main>
       </Wrapper>
     </ThemeProvider>
   )

@@ -17,10 +17,7 @@ const TableRow = styled.tr`
 `
 
 const Wrapper = styled.section`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
 `
 
 const Results = () => (
@@ -32,6 +29,18 @@ const Results = () => (
                 <td>Date</td>
                 <td>Location</td>
             </TableHead>
+            <TableRow>
+                <td>Elliot</td>
+                <td>1</td>
+                <td>01/01/1950</td>
+                <td>Dallas, TX</td>
+            </TableRow>
+            <TableRow>
+                <td>Elliot</td>
+                <td>1</td>
+                <td>01/01/1950</td>
+                <td>Dallas, TX</td>
+            </TableRow>
             <TableRow>
                 <td>Elliot</td>
                 <td>1</td>
