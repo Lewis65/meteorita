@@ -1,4 +1,4 @@
-#Meteorita
+# Meteorita
 
 An app created to allow users to search meteorite strikes.
 

@@ -6,8 +6,9 @@ import Results from './Results'
 import Search from './Search'
 
 const Main = styled.main`
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
+  width: auto;
 `
 
 const ThemeToggle = styled.button`
@@ -20,24 +21,30 @@ const ThemeToggle = styled.button`
   right: 2rem;
 `
 
+const Title = styled.h1`
+  font-family: "Changa", sans-serif;
+  font-size: 4rem;
+  font-weight: 500;
+  margin-bottom: 0;
+  span {
+    color: ${props => props.theme.color.fg};
+  }
+`
+
 const Wrapper = styled.div`
   background-color: ${props => props.theme.color.bg};
   box-sizing: border-box;
   color: ${props => props.theme.color.body};
   display: flex;
   flex-direction: column;
+  font-family: "Cairo", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
   min-height: 100vh;
   padding: 2rem;
   width: 100vw;
-  h1, h2 {
-    font-family: "Changa", sans-serif;
-    font-size: 4rem;
-    font-weight: 500;
-  }
-  * {
-    font-family: "Cairo", sans-serif;
-    font-size: 1.05rem;
-    font-weight: 300;
+  @media screen and (min-width: 600px){
+    font-size: 18px;
   }
 `
 
@@ -49,7 +56,7 @@ function App(){
     <ThemeProvider theme={useNight ? theme.night : theme.day}>
       <Wrapper>
         <header>
-          <h1>meteorita</h1>
+          <Title>mete<span>o</span>rita</Title>
           <ThemeToggle onClick={() => setUseNight(!useNight)}>Toggle theme</ThemeToggle>
         </header>
         <Main>

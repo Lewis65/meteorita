@@ -2,14 +2,26 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Table = styled.table`
+    border-collapse: collapse;
+    width: 100%;
     td {
+        font-size: 1em;
         padding: 0.5rem;
+        word-wrap: break-word;
+    }
+    @media screen and (min-width: 600px){
+        td {
+            padding: 1rem;
+        }
     }
 `
 
 const TableHead = styled.thead`
     background-color: ${props => props.theme.color.fg};
     color: ${props => props.theme.color.body};
+    td {
+        font-weight: 600;
+    }
 `
 
 const TableRow = styled.tr`
@@ -17,7 +29,8 @@ const TableRow = styled.tr`
 `
 
 const Wrapper = styled.section`
-    width: 100%;
+    display: flex;
+    justify-content: center;
 `
 
 const Results = () => (

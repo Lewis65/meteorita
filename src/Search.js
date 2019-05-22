@@ -5,17 +5,38 @@ const Button = styled.button`
     background-color: ${props => props.theme.color.fg};
     border: 0;
     box-shadow: none;
+    box-sizing: border-box;
     color: ${props => props.theme.color.body};
+    font-size: 1em;
     outline: 0;
     padding: 1rem;
+    width: 100%;
+    @media screen and (min-width: 600px){
+        display: inline-block;
+        flex: 0.1 0;
+    }
 `
 
 const Searchbar = styled.input`
     background-color: ${props => props.theme.color.bg2};
     border: 0;
+    box-sizing: border-box;
     color: ${props => props.theme.color.body};
+    display: block;
+    flex: 1;
+    font-size: 1em;
+    margin: 0;
     outline: 0;
     padding: 1rem;
+    width: 100%;
+    &::placeholder {
+        color: ${props => props.theme.color.fg};
+        opacity: 0.7;
+    }
+    @media screen and (min-width: 600px){
+        display: inline-block;
+        max-width: 400px;
+    }
 `
 
 const Wrapper = styled.section`
@@ -24,7 +45,8 @@ const Wrapper = styled.section`
     align-items: center;
     justify-content: center;
     padding: 2rem 0;
-    @media screen and (min-width: 1024px){
+    width: 100%;
+    @media screen and (min-width: 600px){
         flex-direction: row;
     }
 `
