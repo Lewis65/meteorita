@@ -33,39 +33,52 @@ const Wrapper = styled.section`
     justify-content: center;
 `
 
-const Results = () => (
-    <Wrapper>
-        <Table>
-            <thead>
-                <TableHead>
-                    <th>Name</th>
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Location</th>
-                </TableHead>
-            </thead>
-            <tbody>
-                <TableRow>
-                    <td>Elliot</td>
-                    <td>1</td>
-                    <td>01/01/1950</td>
-                    <td>Dallas, TX</td>
+function Results(props) {
+
+    function formatMass(massInGrams) {
+        if(massInGrams){
+            return massInGrams > 999 ? (Math.round(massInGrams/10)/100)+'kg' : massInGrams+'g'
+        } else {
+            return 'No data'
+        }
+    }
+
+    let rows = []
+
+    if(props.data){
+        rows = props.data.map((meteorite, index) => {
+            return (
+                <TableRow key={index}>
+                    <td>{meteorite.name}</td>
+                    <td>{meteorite.id}</td>
+                    <td>{formatMass(meteorite.mass)}</td>
+                    <td>{meteorite.year ? meteorite.year.substr(0, 4) : 'No data'}</td>
+                    <td>{meteorite.geolocation ? meteorite.geolocation.latitude : 'No data'}</td>
+                    <td>{meteorite.geolocation ? meteorite.geolocation.longitude : 'No data'}</td>
                 </TableRow>
-                <TableRow>
-                    <td>Elliot</td>
-                    <td>1</td>
-                    <td>01/01/1950</td>
-                    <td>Dallas, TX</td>
-                </TableRow>
-                <TableRow>
-                    <td>Elliot</td>
-                    <td>1</td>
-                    <td>01/01/1950</td>
-                    <td>Dallas, TX</td>
-                </TableRow>
-            </tbody>
-        </Table>
-    </Wrapper>
-)
+            )
+        })
+    }
+
+    return (
+        <Wrapper>
+            <Table>
+                <thead>
+                    <TableHead>
+                        <th>Name</th>
+                        <th>ID</th>
+                        <th>Mass</th>
+                        <th>Year</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                    </TableHead>
+                </thead>
+                <tbody>
+                    {props.loading ? <TableRow><td colspan='6'>LOADING</td></TableRow> : rows}
+                </tbody>
+            </Table>
+        </Wrapper>
+    )
+}
 
 export default Results
