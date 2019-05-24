@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components'
 import theme from './theme'
+import { APP_TOKEN } from './secrets'
 
 import Results from './Results'
 import Search from './Search'
@@ -62,6 +63,16 @@ class App extends React.Component {
 
   toggleTheme(){
     this.setState({useNightTheme: !this.state.useNightTheme})
+  }
+
+  componentDidMount(){
+    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$$app_token=${APP_TOKEN}&$limit=${10}`
+    fetch(URL, {
+      mode: 'cors'
+    })
+    .then(
+      
+    )
   }
 
   render(){
