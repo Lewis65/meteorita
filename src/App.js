@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled, { ThemeProvider } from 'styled-components'
 import theme from './theme'
 
@@ -48,24 +48,38 @@ const Wrapper = styled.div`
   }
 `
 
-function App(){
+class App extends React.Component {
 
-  const [useNight, setUseNight] = useState(false)
+  constructor(props){
+    super(props)
 
-  return (
-    <ThemeProvider theme={useNight ? theme.night : theme.day}>
-      <Wrapper>
-        <header>
-          <Title>mete<span>o</span>rita</Title>
-          <ThemeToggle onClick={() => setUseNight(!useNight)}>Toggle theme</ThemeToggle>
-        </header>
-        <Main>
-          <Search/>
-          <Results/>
-        </Main>
-      </Wrapper>
-    </ThemeProvider>
-  )
+    this.state = {
+      useNightTheme: false
+    }
+
+    this.toggleTheme = this.toggleTheme.bind(this)
+  }
+
+  toggleTheme(){
+    this.setState({useNightTheme: !this.state.useNightTheme})
+  }
+
+  render(){
+    return (
+      <ThemeProvider theme={this.state.useNightTheme ? theme.night : theme.day}>
+        <Wrapper>
+          <header>
+            <Title>mete<span>o</span>rita</Title>
+            <ThemeToggle onClick={this.toggleTheme}>Toggle theme</ThemeToggle>
+          </header>
+          <Main>
+            <Search/>
+            <Results/>
+          </Main>
+        </Wrapper>
+      </ThemeProvider>
+    )
+  }
 }
 
 export default App;
