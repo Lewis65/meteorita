@@ -16,10 +16,10 @@ const Table = styled.table`
     }
 `
 
-const TableHead = styled.thead`
+const TableHead = styled.tr`
     background-color: ${props => props.theme.color.fg};
     color: ${props => props.theme.color.body};
-    td {
+    th {
         font-weight: 600;
     }
 `
@@ -36,30 +36,34 @@ const Wrapper = styled.section`
 const Results = () => (
     <Wrapper>
         <Table>
-            <TableHead>
-                <td>Name</td>
-                <td>ID</td>
-                <td>Date</td>
-                <td>Location</td>
-            </TableHead>
-            <TableRow>
-                <td>Elliot</td>
-                <td>1</td>
-                <td>01/01/1950</td>
-                <td>Dallas, TX</td>
-            </TableRow>
-            <TableRow>
-                <td>Elliot</td>
-                <td>1</td>
-                <td>01/01/1950</td>
-                <td>Dallas, TX</td>
-            </TableRow>
-            <TableRow>
-                <td>Elliot</td>
-                <td>1</td>
-                <td>01/01/1950</td>
-                <td>Dallas, TX</td>
-            </TableRow>
+            <thead>
+                <TableHead>
+                    <th>Name</th>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                </TableHead>
+            </thead>
+            <tbody>
+                <TableRow>
+                    <td>Elliot</td>
+                    <td>1</td>
+                    <td>01/01/1950</td>
+                    <td>Dallas, TX</td>
+                </TableRow>
+                <TableRow>
+                    <td>Elliot</td>
+                    <td>1</td>
+                    <td>01/01/1950</td>
+                    <td>Dallas, TX</td>
+                </TableRow>
+                <TableRow>
+                    <td>Elliot</td>
+                    <td>1</td>
+                    <td>01/01/1950</td>
+                    <td>Dallas, TX</td>
+                </TableRow>
+            </tbody>
         </Table>
     </Wrapper>
 )
