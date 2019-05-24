@@ -66,12 +66,15 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$$app_token=${APP_TOKEN}&$limit=${10}`
+    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$limit=${10}`
     fetch(URL, {
+      headers: {
+        'X-App-Token': APP_TOKEN
+      },
       mode: 'cors'
     })
     .then(
-      
+      response => console.log(response)
     )
   }
 
