@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components'
 import theme from './theme'
-import { APP_TOKEN } from './secrets'
 
 import Results from './Results'
 import Search from './Search'
@@ -55,6 +54,8 @@ class App extends React.Component {
     super(props)
 
     this.state = {
+      data: [],
+      loading: true,
       useNightTheme: false
     }
 
@@ -66,16 +67,25 @@ class App extends React.Component {
   }
 
   componentDidMount(){
+
     const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$limit=${10}`
+
     fetch(URL, {
       headers: {
-        'X-App-Token': APP_TOKEN
+        'Content-type': 'application/json'
       },
       mode: 'cors'
     })
     .then(
-      response => console.log(response)
+      response => response.json()
     )
+    .then (
+      data => {
+        console.log(data)
+        this.setState({data: data, loading: false})
+      }
+    )
+
   }
 
   render(){
@@ -88,7 +98,7 @@ class App extends React.Component {
           </header>
           <Main>
             <Search/>
-            <Results/>
+            <Results loading={this.state.loading} data={this.state.data}/>
           </Main>
         </Wrapper>
       </ThemeProvider>
