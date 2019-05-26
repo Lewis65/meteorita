@@ -74,7 +74,7 @@ function Results(props) {
                     </TableHead>
                 </thead>
                 <tbody>
-                    {props.loading ? <TableRow><td colspan='6'>LOADING</td></TableRow> : rows}
+                    {props.loading ? <TableRow><td colSpan='6'>...</td></TableRow> : rows}
                 </tbody>
             </Table>
         </Wrapper>

@@ -53,7 +53,7 @@ const Wrapper = styled.section`
 
 const Search = () => (
     <Wrapper>
-        <Searchbar type="text" placeholder="Find a meteorite..." autofocus="true"/>
+        <Searchbar type="text" placeholder="Find a meteorite..." autoFocus/>
         <Button>Search</Button>
     </Wrapper>
 )
