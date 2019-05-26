@@ -30,7 +30,7 @@ const TableRow = styled.tr`
 
 const Wrapper = styled.section`
     display: flex;
-    justify-content: center;
+    flex-direction: column;
 `
 
 function Results(props) {
@@ -62,6 +62,7 @@ function Results(props) {
 
     return (
         <Wrapper>
+            <p>{`Viewing ${props.resultsFound ? props.offset+1 : 0}-${props.offset+props.numberOfResultsOnPage} of ${props.resultsFound} results found.`}</p>
             <Table>
                 <thead>
                     <TableHead>

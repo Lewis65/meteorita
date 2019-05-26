@@ -165,8 +165,7 @@ class App extends React.Component {
           </header>
           <Main>
             <Search handleSearchChange={this.handleSearchChange} handleSearchClick={this.handleSearchClick} searchBox={this.state.searchBox}/>
-            <p>{this.state.loading ? `Loading...` : `Viewing ${this.state.resultsFound ? this.state.offset+1 : 0}-${this.state.offset+numberOfResultsOnPage} of ${this.state.resultsFound} results found.`}</p>
-            <Results loading={this.state.loading} data={dataToDisplay}/>
+            <Results loading={this.state.loading} data={dataToDisplay} resultsFound={this.state.resultsFound} numberOfResultsOnPage={numberOfResultsOnPage} offset={this.state.offset}/>
             <Pagination enableNextButton={enableNextButton} enablePrevButton={enablePrevButton} handlePageClick={this.handlePageClick} resultsFound={this.state.resultsFound}/>
           </Main>
         </Wrapper>
