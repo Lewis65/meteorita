@@ -60,11 +60,14 @@ class App extends React.Component {
       loading: true,
       offset: 0,
       resultsFound: 0,
+      searchBox: '',
       searchTerm: '',
       useNightTheme: false
     }
 
     this.handlePageClick = this.handlePageClick.bind(this)
+    this.handleSearchChange = this.handleSearchChange.bind(this)
+    this.handleSearchClick = this.handleSearchClick.bind(this)
     this.toggleTheme = this.toggleTheme.bind(this)
 
   }
@@ -83,7 +86,6 @@ class App extends React.Component {
     )
     .then (
       data => {
-        console.log(data)
         this.setState({data: data})
       }
     )
@@ -103,7 +105,6 @@ class App extends React.Component {
     )
     .then (
       data => {
-        console.log(data.length + ' results found')
         this.setState({resultsFound: data.length, loading: false})
       }
     )
@@ -117,6 +118,21 @@ class App extends React.Component {
       nextOffset = this.state.offset - this.state.limit
     }
     this.setState({offset: nextOffset}, this.fetchData)
+  }
+
+  handleSearchChange(val){
+    this.setState({searchBox: val})
+  }
+
+  handleSearchClick(){
+    this.setState({
+      loading: true,
+      offset: 0,
+      searchTerm: this.state.searchBox
+    }, () => {
+      this.fetchData()
+      this.fetchTotalData()
+    })
   }
 
   toggleTheme(){
@@ -147,7 +163,7 @@ class App extends React.Component {
             <ThemeToggle onClick={this.toggleTheme}>Toggle theme</ThemeToggle>
           </header>
           <Main>
-            <Search/>
+            <Search handleSearchChange={this.handleSearchChange} handleSearchClick={this.handleSearchClick} searchBox={this.state.searchBox}/>
             <p>{this.state.loading ? `Loading...` : `Viewing ${this.state.offset+1}-${this.state.offset+this.state.limit} of ${this.state.resultsFound} results found.`}</p>
             <Results loading={this.state.loading} data={this.state.data}/>
             <Pagination enableNextButton={enableNextButton} enablePrevButton={enablePrevButton} handlePageClick={this.handlePageClick} resultsFound={this.state.resultsFound}/>
