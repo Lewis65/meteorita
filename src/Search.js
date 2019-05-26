@@ -7,13 +7,29 @@ const Button = styled.button`
     box-shadow: none;
     box-sizing: border-box;
     color: ${props => props.theme.color.body};
+    cursor: pointer;
+    flex: 0;
     font-size: 1em;
     outline: 0;
     padding: 1rem;
+    text-align: center;
     width: 100%;
+    i {
+        display: inline-block;
+    }
+    span {
+        display: none;
+    }
     @media screen and (min-width: 600px){
         display: inline-block;
         flex: 0.1 0;
+        min-width: 150px;
+        span {
+            display: inline-block
+        }
+        i {
+            margin-right: 0.5rem;
+        }
     }
 `
 
@@ -22,7 +38,7 @@ const Searchbar = styled.input`
     border: 0;
     box-sizing: border-box;
     color: ${props => props.theme.color.body};
-    display: block;
+    display: inline-block;
     flex: 1;
     font-size: 1em;
     margin: 0;
@@ -34,27 +50,24 @@ const Searchbar = styled.input`
         opacity: 0.7;
     }
     @media screen and (min-width: 600px){
-        display: inline-block;
-        max-width: 400px;
+        max-width: 500px;
     }
 `
 
 const Wrapper = styled.section`
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    padding: 2rem 0;
+    padding: 1rem 0;
     width: 100%;
     @media screen and (min-width: 600px){
-        flex-direction: row;
+        padding: 2rem 0;
     }
 `
 
 const Search = (props) => (
     <Wrapper>
         <Searchbar onChange={(e)  => props.handleSearchChange(e.target.value)} value={props.searchBox} type="text" placeholder="Find a meteorite..." autoFocus/>
-        <Button onClick={() => props.handleSearchClick()}>Search</Button>
+        <Button onClick={() => props.handleSearchClick()}><i class="fas fa-search"></i><span>Search</span></Button>
     </Wrapper>
 )
 
