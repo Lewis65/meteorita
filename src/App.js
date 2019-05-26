@@ -59,6 +59,7 @@ class App extends React.Component {
       limit: 10,
       loading: true,
       offset: 0,
+      resultsFound: 0,
       useNightTheme: false
     }
 
@@ -87,6 +88,26 @@ class App extends React.Component {
     )
   }
 
+  fetchTotalData(){
+    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$select=id&$limit=50000`
+
+    fetch(URL, {
+      headers: {
+        'Content-type': 'application/json'
+      },
+      mode: 'cors'
+    })
+    .then(
+      response => response.json()
+    )
+    .then (
+      data => {
+        console.log(data.length + ' results found')
+        this.setState({resultsFound: data.length})
+      }
+    )
+  }
+
   handlePageClick(to){
     let nextOffset
     if(to === "next"){
@@ -103,6 +124,7 @@ class App extends React.Component {
 
   componentDidMount(){
     this.fetchData()
+    this.fetchTotalData()
   }
 
   render(){
