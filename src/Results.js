@@ -37,7 +37,7 @@ function Results(props) {
 
     function formatMass(massInGrams) {
         if(massInGrams){
-            return massInGrams > 999 ? (Math.round(massInGrams/10)/100)+'kg' : massInGrams+'g'
+            return massInGrams > 999 ? (Math.round(massInGrams/10)/100)+'kg' : (Math.round(massInGrams*100)/100)+'g'
         } else {
             return 'No data'
         }
