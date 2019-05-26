@@ -21,10 +21,10 @@ function Pagination(props) {
 
     return(
     <Wrapper>
-        <Button>
+        <Button onClick={() => props.handlePageClick("prev")}>
             <i className="fas fa-caret-left"></i>
         </Button>
-        <Button>
+        <Button onClick={() => props.handlePageClick("next")}>
             <i className="fas fa-caret-right"></i>
         </Button>
     </Wrapper>

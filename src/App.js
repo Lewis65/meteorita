@@ -62,7 +62,19 @@ class App extends React.Component {
       useNightTheme: false
     }
 
+    this.handlePageClick = this.handlePageClick.bind(this)
     this.toggleTheme = this.toggleTheme.bind(this)
+
+  }
+
+  handlePageClick(to){
+    let nextOffset
+    if(to === "next"){
+      nextOffset = this.state.offset + this.state.limit
+    } else if(to === "prev"){
+      nextOffset = this.state.offset - this.state.limit
+    }
+    this.setState({offset: nextOffset})
   }
 
   toggleTheme(){
@@ -102,7 +114,7 @@ class App extends React.Component {
           <Main>
             <Search/>
             <Results loading={this.state.loading} data={this.state.data}/>
-            <Pagination/>
+            <Pagination handlePageClick={this.handlePageClick}/>
           </Main>
         </Wrapper>
       </ThemeProvider>
