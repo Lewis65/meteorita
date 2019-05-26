@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { ThemeProvider } from 'styled-components'
 import theme from './theme'
 
+import Pagination from './Pagination'
 import Results from './Results'
 import Search from './Search'
 
@@ -99,6 +100,7 @@ class App extends React.Component {
           <Main>
             <Search/>
             <Results loading={this.state.loading} data={this.state.data}/>
+            <Pagination/>
           </Main>
         </Wrapper>
       </ThemeProvider>
