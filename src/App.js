@@ -128,6 +128,16 @@ class App extends React.Component {
   }
 
   render(){
+
+    let enableNextButton = true
+    let enablePrevButton = true
+
+    if(this.state.offset === 0){
+      enablePrevButton = false
+    } else if(this.state.offset+(this.state.limit*2) >= this.state.resultsFound){
+      enableNextButton = false
+    }
+
     return (
       <ThemeProvider theme={this.state.useNightTheme ? theme.night : theme.day}>
         <Wrapper>
@@ -139,7 +149,7 @@ class App extends React.Component {
             <Search/>
             <p>{this.state.loading ? `Loading...` : `Viewing ${this.state.offset+1}-${this.state.offset+this.state.limit} of ${this.state.resultsFound} results found.`}</p>
             <Results loading={this.state.loading} data={this.state.data}/>
-            <Pagination handlePageClick={this.handlePageClick} resultsFound={this.state.resultsFound}/>
+            <Pagination enableNextButton={enableNextButton} enablePrevButton={enablePrevButton} handlePageClick={this.handlePageClick} resultsFound={this.state.resultsFound}/>
           </Main>
         </Wrapper>
       </ThemeProvider>

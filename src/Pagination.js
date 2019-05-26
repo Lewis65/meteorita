@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Button = styled.button`
-    background-color: ${props => props.theme.color.fg};
     border: 0;
     color: ${props => props.theme.color.body};
     font-size: 20px;
@@ -10,6 +9,12 @@ const Button = styled.button`
     width: 30px;
     text-align: center;
     margin: 2rem;
+    &.disabled {
+        background-color: ${props => props.theme.color.bg2};
+    }
+    &.enabled {
+        background-color: ${props => props.theme.color.fg};
+    }
 `
 
 const Wrapper = styled.div`
@@ -19,12 +24,19 @@ const Wrapper = styled.div`
 
 function Pagination(props) {
 
+    function handleClick(to, allowed){
+        if(!allowed){
+            return
+        }
+        props.handlePageClick(to)
+    }
+
     return(
     <Wrapper>
-        <Button onClick={() => props.handlePageClick("prev")}>
+        <Button className={props.enablePrevButton ? "enabled" : "disabled"} onClick={() => handleClick("prev", props.enablePrevButton)}>
             <i className="fas fa-caret-left"></i>
         </Button>
-        <Button onClick={() => props.handlePageClick("next")}>
+        <Button className={props.enableNextButton ? "enabled" : "disabled"} onClick={() => handleClick("next", props.enableNextButton)}>
             <i className="fas fa-caret-right"></i>
         </Button>
     </Wrapper>
