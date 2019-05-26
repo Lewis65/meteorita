@@ -68,7 +68,7 @@ class App extends React.Component {
 
   componentDidMount(){
 
-    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$limit=${10}`
+    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$limit=${20}`
 
     fetch(URL, {
       headers: {

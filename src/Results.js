@@ -35,6 +35,14 @@ const Wrapper = styled.section`
 
 function Results(props) {
 
+    function formatMass(massInGrams) {
+        if(massInGrams){
+            return massInGrams > 999 ? (Math.round(massInGrams/10)/100)+'kg' : massInGrams+'g'
+        } else {
+            return 'No data'
+        }
+    }
+
     let rows = []
 
     if(props.data){
@@ -43,10 +51,10 @@ function Results(props) {
                 <TableRow key={index}>
                     <td>{meteorite.name}</td>
                     <td>{meteorite.id}</td>
-                    <td>{`${meteorite.mass > 999 ? (Math.round(meteorite.mass/10)/100)+'k' : meteorite.mass}g`}</td>
-                    <td>{meteorite.year.substr(0, 4)}</td>
-                    <td>{meteorite.geolocation.latitude}</td>
-                    <td>{meteorite.geolocation.longitude}</td>
+                    <td>{formatMass(meteorite.mass)}</td>
+                    <td>{meteorite.year ? meteorite.year.substr(0, 4) : 'No data'}</td>
+                    <td>{meteorite.geolocation ? meteorite.geolocation.latitude : 'No data'}</td>
+                    <td>{meteorite.geolocation ? meteorite.geolocation.longitude : 'No data'}</td>
                 </TableRow>
             )
         })
