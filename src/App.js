@@ -60,6 +60,7 @@ class App extends React.Component {
       loading: true,
       offset: 0,
       resultsFound: 0,
+      searchTerm: '',
       useNightTheme: false
     }
 
@@ -69,7 +70,7 @@ class App extends React.Component {
   }
 
   fetchData(){
-    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$order=name&$limit=${this.state.limit}&$offset=${this.state.offset}`
+    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$order=name&$limit=${this.state.limit}&$offset=${this.state.offset}&$where=UPPER(name)%20like'%25${this.state.searchTerm.toUpperCase()}%25'`
 
     fetch(URL, {
       headers: {
@@ -83,13 +84,13 @@ class App extends React.Component {
     .then (
       data => {
         console.log(data)
-        this.setState({data: data, loading: false})
+        this.setState({data: data})
       }
     )
   }
 
   fetchTotalData(){
-    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$select=id&$limit=50000`
+    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$select=id&$limit=50000&$where=UPPER(name)%20like'%25${this.state.searchTerm.toUpperCase()}%25'`
 
     fetch(URL, {
       headers: {
@@ -103,7 +104,7 @@ class App extends React.Component {
     .then (
       data => {
         console.log(data.length + ' results found')
-        this.setState({resultsFound: data.length})
+        this.setState({resultsFound: data.length, loading: false})
       }
     )
   }
