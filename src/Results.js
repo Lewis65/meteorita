@@ -39,10 +39,14 @@ function Results(props) {
 
     function formatMass(massInGrams) {
         if(massInGrams){
-            return massInGrams > 999 ? (Math.round(massInGrams/10)/100)+'kg' : (Math.round(massInGrams*100)/100)+'g'
+            return massInGrams > 999 ? toDecimal(massInGrams/1000, 2)+'kg' : toDecimal(massInGrams, 2)+'g'
         } else {
             return 'No data'
         }
+    }
+
+    function toDecimal(val, places){
+        return Math.round(val*Math.pow(10, places))/Math.pow(10, places)
     }
 
     let rows = []
@@ -55,8 +59,8 @@ function Results(props) {
                     <td>{meteorite.id}</td>
                     <td>{formatMass(meteorite.mass)}</td>
                     <td>{meteorite.year ? meteorite.year.substr(0, 4) : 'No data'}</td>
-                    <td>{meteorite.geolocation ? meteorite.geolocation.latitude : 'No data'}</td>
-                    <td>{meteorite.geolocation ? meteorite.geolocation.longitude : 'No data'}</td>
+                    <td>{meteorite.geolocation ? toDecimal(meteorite.geolocation.latitude, 3) : 'No data'}</td>
+                    <td>{meteorite.geolocation ? toDecimal(meteorite.geolocation.longitude, 3) : 'No data'}</td>
                 </TableRow>
             )
         })
