@@ -56,7 +56,9 @@ class App extends React.Component {
 
     this.state = {
       data: [],
+      limit: 10,
       loading: true,
+      offset: 0,
       useNightTheme: false
     }
 
@@ -69,7 +71,7 @@ class App extends React.Component {
 
   componentDidMount(){
 
-    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$limit=${20}`
+    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$limit=${this.state.limit}&$offset=${this.state.offset}`
 
     fetch(URL, {
       headers: {
