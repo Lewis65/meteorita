@@ -44,8 +44,8 @@ const Wrapper = styled.div`
   font-size: 16px;
   font-weight: 300;
   min-height: 100vh;
+  max-width: 100vw;
   padding: 2rem;
-  width: 100vw;
   @media screen and (min-width: 600px){
     font-size: 18px;
   }
