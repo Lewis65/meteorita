@@ -66,8 +66,11 @@ const Wrapper = styled.section`
 
 const Search = (props) => (
     <Wrapper>
-        <Searchbar onChange={(e)  => props.handleSearchChange(e.target.value)} value={props.searchBox} type="text" placeholder="Find a meteorite..." autoFocus/>
-        <Button onClick={() => props.handleSearchClick()}><i class="fas fa-search"></i><span>Search</span></Button>
+        <Searchbar onChange={(e)  => props.handleSearchChange(e.target.value)} onKeyPress={(e) => e.key === 'Enter' ? props.handleSearchClick() : null} value={props.searchBox} type="text" placeholder="Find a meteorite..." autoFocus/>
+        <Button onClick={() => props.handleSearchClick()}>
+            <i className="fas fa-search"></i>
+            <span>Search</span>
+        </Button>
     </Wrapper>
 )
 
