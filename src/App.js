@@ -13,10 +13,12 @@ const Main = styled.main`
 `
 
 const ThemeToggle = styled.button`
-  background-color: ${props => props.theme.color.bg2};
+  background-color: ${props => props.theme.color.fg};
   border: 0;
-  color: ${props => props.theme.color.body};
-  padding: 1rem;
+  color: ${props => props.theme.color.bg2};
+  cursor: pointer;
+  font-size: 1.25rem;
+  padding: 0.5rem;
   position: absolute;
   top: 2rem;
   right: 2rem;
@@ -161,7 +163,9 @@ class App extends React.Component {
         <Wrapper>
           <header>
             <Title>mete<span>o</span>rita</Title>
-            <ThemeToggle onClick={this.toggleTheme}>Toggle theme</ThemeToggle>
+            <ThemeToggle onClick={this.toggleTheme}>
+              {this.state.useNightTheme ? <i className="fas fa-sun"></i> : <i className="fas fa-moon"></i>}
+            </ThemeToggle>
           </header>
           <Main>
             <Search handleSearchChange={this.handleSearchChange} handleSearchClick={this.handleSearchClick} searchBox={this.state.searchBox}/>
