@@ -151,7 +151,8 @@ class App extends React.Component {
 
     if(this.state.offset === 0){
       enablePrevButton = false
-    } else if(this.state.offset+(this.state.limit*2) >= this.state.resultsFound){
+    }
+    if(this.state.offset+(this.state.limit) >= this.state.resultsFound){
       enableNextButton = false
     }
 
@@ -164,7 +165,7 @@ class App extends React.Component {
           </header>
           <Main>
             <Search handleSearchChange={this.handleSearchChange} handleSearchClick={this.handleSearchClick} searchBox={this.state.searchBox}/>
-            <p>{this.state.loading ? `Loading...` : `Viewing ${this.state.offset+1}-${this.state.offset+this.state.limit} of ${this.state.resultsFound} results found.`}</p>
+            <p>{this.state.loading ? `Loading...` : `Viewing ${this.state.data.length ? this.state.offset+1 : 0}-${this.state.offset+this.state.data.length} of ${this.state.resultsFound} results found.`}</p>
             <Results loading={this.state.loading} data={this.state.data}/>
             <Pagination enableNextButton={enableNextButton} enablePrevButton={enablePrevButton} handlePageClick={this.handlePageClick} resultsFound={this.state.resultsFound}/>
           </Main>
