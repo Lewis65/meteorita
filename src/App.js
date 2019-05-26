@@ -56,10 +56,11 @@ class App extends React.Component {
 
     this.state = {
       data: [],
-      limit: 10,
+      limit: 100000,
       loading: true,
       offset: 0,
       resultsFound: 0,
+      resultsPerPage: 10,
       searchBox: '',
       searchTerm: '',
       useNightTheme: false
@@ -73,7 +74,7 @@ class App extends React.Component {
   }
 
   fetchData(){
-    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$order=name&$limit=${this.state.limit}&$offset=${this.state.offset}&$where=UPPER(name)%20like'%25${this.state.searchTerm.toUpperCase()}%25'`
+    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$order=name&$limit=${this.state.limit}&$where=UPPER(name)%20like'%25${this.state.searchTerm.toUpperCase()}%25'`
 
     fetch(URL, {
       headers: {
@@ -86,26 +87,11 @@ class App extends React.Component {
     )
     .then (
       data => {
-        this.setState({data: data})
-      }
-    )
-  }
-
-  fetchTotalData(){
-    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$select=id&$limit=50000&$where=UPPER(name)%20like'%25${this.state.searchTerm.toUpperCase()}%25'`
-
-    fetch(URL, {
-      headers: {
-        'Content-type': 'application/json'
-      },
-      mode: 'cors'
-    })
-    .then(
-      response => response.json()
-    )
-    .then (
-      data => {
-        this.setState({resultsFound: data.length, loading: false})
+        this.setState({
+          data: data,
+          loading: false,
+          resultsFound: data.length
+        })
       }
     )
   }
@@ -113,11 +99,11 @@ class App extends React.Component {
   handlePageClick(to){
     let nextOffset
     if(to === "next"){
-      nextOffset = this.state.offset + this.state.limit
+      nextOffset = this.state.offset + this.state.resultsPerPage
     } else if(to === "prev"){
-      nextOffset = this.state.offset - this.state.limit
+      nextOffset = this.state.offset - this.state.resultsPerPage
     }
-    this.setState({offset: nextOffset}, this.fetchData)
+    this.setState({offset: nextOffset})
   }
 
   handleSearchChange(val){
@@ -131,7 +117,6 @@ class App extends React.Component {
       searchTerm: this.state.searchBox
     }, () => {
       this.fetchData()
-      this.fetchTotalData()
     })
   }
 
@@ -141,19 +126,34 @@ class App extends React.Component {
 
   componentDidMount(){
     this.fetchData()
-    this.fetchTotalData()
   }
 
   render(){
 
-    let enableNextButton = true
-    let enablePrevButton = true
+    let enableNextButton = false
+    let enablePrevButton = false
+    let numberOfResultsOnPage = 0
+    let dataToDisplay = []
 
-    if(this.state.offset === 0){
-      enablePrevButton = false
+    if(this.state.offset > 0){
+      enablePrevButton = true
     }
-    if(this.state.offset+(this.state.limit) >= this.state.resultsFound){
-      enableNextButton = false
+
+    //If data has been fetched
+    if(this.state.resultsFound){
+
+      //If this is the last page
+      if(this.state.offset + this.state.resultsPerPage >= this.state.resultsFound){
+        //Set the number of results on page appropriately for slicing data and displaying results #s
+        numberOfResultsOnPage = this.state.resultsFound-this.state.offset
+      } else {
+        //Else display max results per page and enable next button
+        numberOfResultsOnPage = this.state.resultsPerPage
+        enableNextButton = true
+      }
+
+      //Slice total data array to the results for this page
+      dataToDisplay = this.state.data.slice(this.state.offset, this.state.offset + numberOfResultsOnPage)
     }
 
     return (
@@ -165,8 +165,8 @@ class App extends React.Component {
           </header>
           <Main>
             <Search handleSearchChange={this.handleSearchChange} handleSearchClick={this.handleSearchClick} searchBox={this.state.searchBox}/>
-            <p>{this.state.loading ? `Loading...` : `Viewing ${this.state.data.length ? this.state.offset+1 : 0}-${this.state.offset+this.state.data.length} of ${this.state.resultsFound} results found.`}</p>
-            <Results loading={this.state.loading} data={this.state.data}/>
+            <p>{this.state.loading ? `Loading...` : `Viewing ${this.state.resultsFound ? this.state.offset+1 : 0}-${this.state.offset+numberOfResultsOnPage} of ${this.state.resultsFound} results found.`}</p>
+            <Results loading={this.state.loading} data={dataToDisplay}/>
             <Pagination enableNextButton={enableNextButton} enablePrevButton={enablePrevButton} handlePageClick={this.handlePageClick} resultsFound={this.state.resultsFound}/>
           </Main>
         </Wrapper>
