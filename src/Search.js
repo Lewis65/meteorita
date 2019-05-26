@@ -51,10 +51,10 @@ const Wrapper = styled.section`
     }
 `
 
-const Search = () => (
+const Search = (props) => (
     <Wrapper>
-        <Searchbar type="text" placeholder="Find a meteorite..." autofocus="true"/>
-        <Button>Search</Button>
+        <Searchbar onChange={(e)  => props.handleSearchChange(e.target.value)} value={props.searchBox} type="text" placeholder="Find a meteorite..." autoFocus/>
+        <Button onClick={() => props.handleSearchClick()}>Search</Button>
     </Wrapper>
 )
 
