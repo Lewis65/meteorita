@@ -137,8 +137,9 @@ class App extends React.Component {
           </header>
           <Main>
             <Search/>
+            <p>{this.state.loading ? `Loading...` : `Viewing ${this.state.offset+1}-${this.state.offset+this.state.limit} of ${this.state.resultsFound} results found.`}</p>
             <Results loading={this.state.loading} data={this.state.data}/>
-            <Pagination handlePageClick={this.handlePageClick}/>
+            <Pagination handlePageClick={this.handlePageClick} resultsFound={this.state.resultsFound}/>
           </Main>
         </Wrapper>
       </ThemeProvider>
