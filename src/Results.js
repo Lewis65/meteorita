@@ -5,13 +5,15 @@ const Table = styled.table`
     border-collapse: collapse;
     width: 100%;
     td {
-        font-size: 1em;
-        padding: 0.5rem;
+        font-size: 0.85rem;
+        padding: 0.25rem;
+        overflow-x: hidden;
         word-wrap: break-word;
     }
     @media screen and (min-width: 600px){
         td {
-            padding: 1rem;
+            font-size: 1rem;
+            padding: 0.75rem;
         }
     }
 `

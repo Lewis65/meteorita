@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { ThemeProvider } from 'styled-components'
 import theme from './theme'
 
+import Loader from './Loader'
 import Pagination from './Pagination'
 import Results from './Results'
 import Search from './Search'
@@ -114,8 +115,10 @@ class App extends React.Component {
 
   handleSearchClick(){
     this.setState({
+      data: [],
       loading: true,
       offset: 0,
+      resultsFound: 0,
       searchTerm: this.state.searchBox
     }, () => {
       this.fetchData()
@@ -169,8 +172,14 @@ class App extends React.Component {
           </header>
           <Main>
             <Search handleSearchChange={this.handleSearchChange} handleSearchClick={this.handleSearchClick} searchBox={this.state.searchBox}/>
-            <Results loading={this.state.loading} data={dataToDisplay} resultsFound={this.state.resultsFound} numberOfResultsOnPage={numberOfResultsOnPage} offset={this.state.offset}/>
-            <Pagination enableNextButton={enableNextButton} enablePrevButton={enablePrevButton} handlePageClick={this.handlePageClick} resultsFound={this.state.resultsFound}/>
+            {this.state.loading ?
+              <Loader/> :
+              <Results loading={this.state.loading} data={dataToDisplay} resultsFound={this.state.resultsFound} numberOfResultsOnPage={numberOfResultsOnPage} offset={this.state.offset}/>
+            }
+            {this.state.resultsFound && this.state.resultsFound > this.state.resultsPerPage ?
+              <Pagination enableNextButton={enableNextButton} enablePrevButton={enablePrevButton} handlePageClick={this.handlePageClick} resultsFound={this.state.resultsFound}/> :
+              null
+            }
           </Main>
         </Wrapper>
       </ThemeProvider>
