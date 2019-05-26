@@ -76,8 +76,8 @@ function Results(props) {
                         <th>ID</th>
                         <th>Mass</th>
                         <th>Year</th>
-                        <th>Latitude</th>
-                        <th>Longitude</th>
+                        <th>Lat.</th>
+                        <th>Long.</th>
                     </TableHead>
                 </thead>
                 <tbody>

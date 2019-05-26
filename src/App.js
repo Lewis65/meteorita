@@ -46,9 +46,10 @@ const Wrapper = styled.div`
   font-weight: 300;
   min-height: 100vh;
   max-width: 100vw;
-  padding: 2rem;
+  padding: 1rem;
   @media screen and (min-width: 600px){
     font-size: 18px;
+    padding: 2rem;
   }
 `
 
