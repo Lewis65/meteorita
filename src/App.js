@@ -67,23 +67,8 @@ class App extends React.Component {
 
   }
 
-  handlePageClick(to){
-    let nextOffset
-    if(to === "next"){
-      nextOffset = this.state.offset + this.state.limit
-    } else if(to === "prev"){
-      nextOffset = this.state.offset - this.state.limit
-    }
-    this.setState({offset: nextOffset})
-  }
-
-  toggleTheme(){
-    this.setState({useNightTheme: !this.state.useNightTheme})
-  }
-
-  componentDidMount(){
-
-    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$limit=${this.state.limit}&$offset=${this.state.offset}`
+  fetchData(){
+    const URL = `https://data.nasa.gov/resource/gh4g-9sfh.json?$order=name&$limit=${this.state.limit}&$offset=${this.state.offset}`
 
     fetch(URL, {
       headers: {
@@ -100,7 +85,24 @@ class App extends React.Component {
         this.setState({data: data, loading: false})
       }
     )
+  }
 
+  handlePageClick(to){
+    let nextOffset
+    if(to === "next"){
+      nextOffset = this.state.offset + this.state.limit
+    } else if(to === "prev"){
+      nextOffset = this.state.offset - this.state.limit
+    }
+    this.setState({offset: nextOffset}, this.fetchData)
+  }
+
+  toggleTheme(){
+    this.setState({useNightTheme: !this.state.useNightTheme})
+  }
+
+  componentDidMount(){
+    this.fetchData()
   }
 
   render(){
